@@ -106,7 +106,8 @@ def analyze_signal(payload: AdvancedSignalPayload):
         
         Rules:
         - We only want high-probability trades (Confidence > 75).
-        - Entry point should be calculated for an optimal retracement (using SuperTrend bounds or MSH/MSL).
+        - If the setup probability is extremely high and the current price is already at an optimal level, use 'Buy' or 'Sell' for direct market execution.
+        - Otherwise, calculate an optimal retracement entry using SuperTrend bounds or MSH/MSL.
         - Stop Loss MUST be safe, placed outside the SuperTrend H/L bounds or Major Structure bounds.
         - Take Profit should maximize RR, aiming for at least 1:2. The EA will handle Smart Breakeven at 1.25R.
         - If confidence is low due to poor momentum or structure, set approved to false.
@@ -115,7 +116,7 @@ def analyze_signal(payload: AdvancedSignalPayload):
         {{
             "confidence": <int 0-100>,
             "approved": <boolean>,
-            "action": "<string: 'Buy Limit', 'Sell Limit', 'Buy Stop', 'Sell Stop'>",
+            "action": "<string: 'Buy', 'Sell', 'Buy Limit', 'Sell Limit', 'Buy Stop', 'Sell Stop'>",
             "entry_price": <float>,
             "stop_loss": <float>,
             "take_profit": <float>,
